@@ -11,6 +11,7 @@
     <!-- Scroll view  -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
+        android:paddingTop="10dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,13 +25,34 @@
           android:orientation="vertical"
           >
         <!-- timeLine-->
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:text="@string/games_offers"
-            android:padding="5dp"
-            android:textSize="@dimen/_20sdp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"/>
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_height="wrap_content">
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_centerVertical="true"
+              android:layout_alignParentStart="true"
+              android:text="@string/games_offers"
+              android:padding="5dp"
+              android:textSize="@dimen/_18sdp"
+              android:textStyle="bold"
+              android:layout_height="wrap_content"/>
+          <com.google.android.material.button.MaterialButton
+              android:layout_width="wrap_content"
+              android:layout_centerVertical="true"
+              android:backgroundTint="@color/colorPrimaryLight"
+              android:layout_alignParentEnd="true"
+              android:text="@string/all_offers"
+              android:padding="@dimen/_9sdp"
+              app:cornerRadius="@dimen/_8sdp"
+              android:textColor="@color/colorPrimary"
+              android:textSize="@dimen/_13sdp"
+              android:textStyle="bold"
+              android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/l_time_line"
             android:layout_width="match_parent"
@@ -45,7 +67,10 @@
         <TextView
             android:layout_width="match_parent"
             android:text="@string/Discover"
-            android:padding="5dp"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
             android:background="@color/light_gray"
             android:textSize="@dimen/_20sdp"
             android:textStyle="bold"

@@ -53,7 +53,7 @@ fun toCategoryUIITem(item: CategoryDataList): CategoryUIItem {
     markedArray = markedArray.subList(0, maxPerCoulm).toCollection(ArrayList())
     markedArray.add(
       SupCategoriesUIItem(
-        id = -1, name = "show all \n${item.users?.data?.size}", profilePic = "nil", cover = "nil"
+        id = -1, name = "Show all \n( ${item.users?.data?.size} )", profilePic = "nil", cover = "nil"
       )
     )
   }

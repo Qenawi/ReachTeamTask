@@ -11,9 +11,9 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/_8sdp"
         android:text="TextView"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_18sdp"
         android:textStyle="bold"
         />
     <androidx.recyclerview.widget.RecyclerView
