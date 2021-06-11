@@ -13,8 +13,8 @@ android {
   }
 
   signingConfigs {
-    debug {
-      storeFile file('reach.jks')
+    release {
+      storeFile file('/reach.jks')
       storePassword '123123'
       keyAlias 'reach'
       keyPassword '123123'
