@@ -5,14 +5,13 @@
     >
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
+      android:background="@color/white"
       android:layout_height="match_parent"
       >
     <!-- Scroll view  -->
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,60 +22,73 @@
           android:layout_height="wrap_content"
           android:minHeight="@dimen/vehicle_specs_width"
           android:orientation="vertical"
-          android:padding="@dimen/_8sdp"
           >
         <!-- timeLine-->
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/games_offers"
+            android:padding="5dp"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/l_time_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:adapter="@{viewModel.offerAdapter}"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_home_view"
+            tools:listitem="@layout/offer_list_item"
             />
         <!-- category-->
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/Discover"
+            android:padding="5dp"
+            android:background="@color/light_gray"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/l_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:itemCount="1"
+            android:paddingBottom="100dp"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal"
+            app:adapter="@{viewModel.catAdapter}"
+            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_home_view"
+            tools:listitem="@layout/category_cell_layout"
             />
 
       </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
     <!-- Search text view -->
-    <com.google.android.material.textfield.TextInputLayout
+
+    <com.qm.reach.ui.fragment.home.view.CustomSearchView
         android:id="@+id/til_search"
         android:layout_width="0dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:viewModel="@{viewModel}"
+        android:layout_height="wrap_content"/>
+
+    <com.qm.reach.ui.fragment.home.view.CustomBottomBar
+        android:id="@+id/bottom_bar"
+        android:layout_width="0dp"
+        android:background="@color/transparent"
+        viewModel="@{viewModel}"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusTopStart="8dp"
-        app:hintEnabled="false"
-        app:startIconDrawable="@drawable/ic_search"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        >
-
-      <com.google.android.material.textfield.TextInputEditText
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:hint="@string/search"
-          android:imeOptions="actionSearch"
-          android:inputType="text"
-          android:text="@={viewModel.searchText}"
-          />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintVertical_bias="1.0"
+        />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -87,36 +87,7 @@ fun <T> IsRepo.requestNetworkCall(
     }
     return mutLiveData
 }
-/*
-fun <T : Any> AndroidBaseViewModel.requestNewCallRefactor(
-    networkCall: suspend () -> NetworkResponse<T, ErrorResponse>,
-    disableProgress: Boolean = false,
-    successCallBack: (T) -> Unit
-) {
-    viewModelScope.launch {
-        postResult(Resource.Loading(null))
-        isLoading.set(!disableProgress)
-        val res = networkCall() // execute
-        Timber.e("$res")
-        when (res) {
-            is NetworkResponse.Success -> {
-                viewModelScope.launch(Dispatchers.Main) {
-                    successCallBack(res.body)
-                }
-            }
-            is NetworkResponse.ServerError -> postResult(Resource.Error(getShownError(res.body)))
-            is NetworkResponse.NetworkError -> postResult(Resource.Error(app.getString(R.string.network_error)))
-            is NetworkResponse.UnknownError -> postResult(Resource.Error(app.getString(R.string.server_error)))
-        }
 
-    }
-}
-*/
-private fun getShownError(response: ErrorResponse?): String {
-    return response?.validation?.let {
-        "${it[0]}"
-    } ?: "null"
-}
 
 fun Activity.restartApp() {
     showActivity(MainActivity::class.java)

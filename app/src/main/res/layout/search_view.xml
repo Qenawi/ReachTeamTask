@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:padding="@dimen/_12sdp"
+        >
+        <!-- Search Content   -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.8"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/circle_draw_search"
+            android:paddingBottom="5dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="5dp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:contentDescription="@string/app_name"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="@color/colorPrimary"
+                />
+            <EditText
+                android:id="@+id/l_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:hint="@string/search"
+                android:text="@={viewModel.searchText}"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
+                android:background="@color/white"
+                />
+
+        </LinearLayout>
+        <!-- Location icon content -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:src="@drawable/location"
+            app:tint="@color/white"
+            android:contentDescription="@string/app_name"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <data>
+       <variable
+           name="viewModel"
+           type="com.qm.reach.ui.fragment.home.viewmodel.HomeViewModel"
+           />
+    </data>
+</layout>

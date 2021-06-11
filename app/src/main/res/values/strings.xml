@@ -15,4 +15,9 @@
     <string name="cancel">Cancel</string>
     <string name="network_error">check your network connection</string>
     <string name="server_error">server error</string>
+  <string name="games_offers"><![CDATA[Games & Offers]]></string>
+    <string name="categories">Categories</string>
+  <string name="Discover">Discover</string>
+  <string name="other">Other</string>
+  <string name="profile">Profile</string>
 </resources>

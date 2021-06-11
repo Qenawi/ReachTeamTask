@@ -1,50 +1,45 @@
 package com.qm.reach.ui.fragment.home.view
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.qm.reach.base.network.Status.*
 import com.qm.reach.base.view.BaseFragment
 import com.qm.reach.databinding.FragmentHomeBinding
 import com.qm.reach.di.Injectable
+import com.qm.reach.ui.fragment.home.protocols.HomeViewProtocol
+import com.qm.reach.ui.fragment.home.router.HomeRouter
 import com.qm.reach.ui.fragment.home.viewmodel.HomeViewModel
-import com.qm.reach.util.observe
 import javax.inject.Inject
 
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), Injectable {
-    override fun pageTitle(): String = ""
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
+  Injectable,
+  CustomSearchViewDelegate, HomeViewProtocol {
+  override fun pageTitle(): String = ""
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+  @Inject
+  lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override val mViewModel: HomeViewModel by viewModels {
-        viewModelFactory
-    }
+  override val mViewModel: HomeViewModel by viewModels { viewModelFactory }
+  override fun onViewCreated(
+    view: View,
+    savedInstanceState: Bundle?
+  ) {
+    super.onViewCreated(view, savedInstanceState)
+    //MARK:- setup binding
+    binding.tilSearch.callBack = this
+    mViewModel.view = this
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mViewModel.apply {
-            observe(mutableLiveData) {
-                when (it) {
-                }
-            }
-            observe(observeUsers()) {
-                when (it?.status) {
-                    SUCCESS -> {
-                        showProgress(false)
-                        loadDataOnAdapter(it.data?.results)
-                    }
-                    MESSAGE -> {
-                        showProgress(false)
-                        //activity?.showErrorDialog(it.message)
-                    }
-                    LOADING -> {
-                        showProgress()
-                    }
-                }
-            }
-        }
-    }
+  //MARK:- onSearch View Selection
+  override fun onSearcSelection() {
+    mViewModel.filter()
+  }
+  //MARK:- match text using pattern REGX util
+  override fun handleOfferOnclick(str: String) {
 
+    if (Patterns.PHONE.matcher(str).find()) HomeRouter.callPhone(str, this)
+    else if (Patterns.WEB_URL.matcher(str).find()) HomeRouter.openUrl(str, this)
+  }
 }

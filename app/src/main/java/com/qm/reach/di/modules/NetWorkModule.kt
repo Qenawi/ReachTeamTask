@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 class NetWorkModule {
-  private val BaseUrl = "AjaxMonku"
+  private val BaseUrl = "https://api.dev.reachnetwork.co/api/v1/"
 
   @Singleton
   @Provides

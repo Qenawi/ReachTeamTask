@@ -1,6 +1,9 @@
 package com.qm.reach.data.remote
 
+import com.google.gson.JsonElement
 import com.qm.reach.ui.fragment.home.HomeResponse
+import com.qm.reach.ui.fragment.home.model.CategoryRequestModel
+import com.qm.reach.ui.fragment.home.model.OffersGamesRequestModel
 import io.reactivex.rxjava3.core.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,6 +14,9 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-  @GET("character")
-  fun getChars(@Query("page") page: Int): Flowable<HomeResponse>
+  @GET("timeline")
+  fun getTimeLine(): Flowable<OffersGamesRequestModel>
+
+  @GET("categories")
+  fun getCategory(): Flowable<CategoryRequestModel>
 }

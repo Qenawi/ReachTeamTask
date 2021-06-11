@@ -1,4 +1,6 @@
 package com.qm.reach.ui.fragment.home.protocols
 
 //MARK:- home view protocols
-interface HomeViewProtocol
+interface HomeViewProtocol{
+  fun handleOfferOnclick(str:String)
+}
