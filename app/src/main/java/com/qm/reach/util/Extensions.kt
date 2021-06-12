@@ -61,6 +61,10 @@ import java.io.File
 import java.lang.reflect.ParameterizedType
 
 
+private val imageHeight = 300
+private val imageWidth = 300
+
+
 fun Activity.showActivity(
     destActivity: Class<out AppCompatActivity>,
     intent: Intent = Intent(this, destActivity)
@@ -152,7 +156,7 @@ fun String.isValidUrl(): Boolean {
 fun ImageView.loadImageFromURL(url: String, progressBar: ProgressBar? = null) {
     val requestOptions = RequestOptions()
         .centerCrop()
-        .override(300 ,300)
+        .override(imageWidth , imageHeight)
     progressBar?.visible()
     Glide.with(this).asBitmap()
         .load(url)

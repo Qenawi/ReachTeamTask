@@ -9,6 +9,7 @@ import com.qm.reach.databinding.AppDataBindingComponent
 import com.qm.reach.di.AppInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 import javax.inject.Inject
@@ -20,7 +21,8 @@ class BaseApplication : Application(), HasActivityInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
-    override fun onCreate() {
+    override fun onCreate()
+    {
         super.onCreate()
         if (BuildConfig.DEBUG) {
             initTimber()
@@ -28,6 +30,9 @@ class BaseApplication : Application(), HasActivityInjector {
         DataBindingUtil.setDefaultComponent(AppDataBindingComponent())
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         AppInjector.init(this)
+
+        //MARK:- handle error with out subscribe
+        RxJavaPlugins.setErrorHandler(Timber::e)
     }
 
     private fun initTimber() {

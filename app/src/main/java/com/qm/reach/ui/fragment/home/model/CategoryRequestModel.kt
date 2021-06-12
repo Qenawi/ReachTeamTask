@@ -1,12 +1,17 @@
 package com.qm.reach.ui.fragment.home.model
 
 
-import com.google.gson.annotations.SerializedName
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
+@Entity
 @Parcelize
 data class CategoryRequestModel(
+    @PrimaryKey(autoGenerate = false)
+    var id: Int? = 0,
     @SerializedName("data")
     val data: List<CategoryDataList?>?,
 ) : Parcelable

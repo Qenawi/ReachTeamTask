@@ -11,7 +11,12 @@ import com.qm.reach.util.Resource
 open class AndroidBaseViewModel(val app: Application) : AndroidViewModel(app), Observable {
     private val mCallBacks: PropertyChangeRegistry = PropertyChangeRegistry()
     val mutableLiveData = MutableLiveData<Any?>()
-    var isLoading = ObservableBoolean()
+    var isLoading = ObservableBoolean(false)
+    var errorMessage= MutableLiveData<String>()
+    fun setError(t:String)
+    {
+        errorMessage.postValue(t)
+    }
 
     //for network
     val resultLiveData = MutableLiveData<Resource<Any?>>()

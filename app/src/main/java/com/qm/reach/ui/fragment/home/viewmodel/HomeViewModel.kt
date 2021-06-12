@@ -2,11 +2,13 @@ package com.qm.reach.ui.fragment.home.viewmodel
 
 import android.app.Application
 import androidx.databinding.ObservableField
+import com.qm.reach.R
+import com.qm.reach.base.network.Status.SUCCESS
 import com.qm.reach.base.viewmodel.AndroidBaseViewModel
 import com.qm.reach.ui.fragment.home.model.CategoryUIItem
-import com.qm.reach.ui.fragment.home.repository.HomeRepository
 import com.qm.reach.ui.fragment.home.model.OfferUIItem
 import com.qm.reach.ui.fragment.home.protocols.HomeViewProtocol
+import com.qm.reach.ui.fragment.home.repository.HomeRepository
 import com.qm.reach.ui.fragment.home.view.BottomBarNavigation
 import com.qm.reach.ui.fragment.home.view.BottomBarNavigation.Other
 import com.qm.reach.ui.fragment.home.view.MainCategoryAdapter
@@ -49,14 +51,21 @@ class HomeViewModel @Inject constructor(
   val bottomBarSelection = ObservableField<BottomBarNavigation>(BottomBarNavigation.Search)
 
   private fun loadCats() {
+    isLoading.set(true)
     homeRepository.getCategories { a ->
-      onCategoryReady(a.data)
+      isLoading.set(false)
+      if (a.status == SUCCESS) onCategoryReady(a.data)
+      else setError(a.message ?: app.getString(R.string.network_error))
     }
   }
 
   private fun loadOffers() {
+    isLoading.set(true)
     homeRepository.getOffers { a ->
-      onOfferReady(a.data)
+      isLoading.set(false)
+      if (a.status == SUCCESS) onOfferReady(a.data)
+      else setError(a.message ?: app.getString(R.string.network_error))
+
     }
   }
 
