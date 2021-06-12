@@ -25,7 +25,16 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
@@ -44,13 +53,9 @@ import com.qm.reach.R
 import com.qm.reach.app.BaseApplication
 import com.qm.reach.base.network.IsRepo
 import com.qm.reach.base.view.BaseFragment
-import com.qm.reach.base.viewmodel.AndroidBaseViewModel
-import com.qm.reach.data.remote.ErrorResponse
 import com.qm.reach.ui.activity.MainActivity
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
 import java.lang.reflect.ParameterizedType
@@ -147,7 +152,7 @@ fun String.isValidUrl(): Boolean {
 fun ImageView.loadImageFromURL(url: String, progressBar: ProgressBar? = null) {
     val requestOptions = RequestOptions()
         .centerCrop()
-        .override(1600 ,1600)
+        .override(300 ,300)
     progressBar?.visible()
     Glide.with(this).asBitmap()
         .load(url)

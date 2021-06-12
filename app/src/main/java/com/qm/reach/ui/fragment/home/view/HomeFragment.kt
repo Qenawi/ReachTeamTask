@@ -13,6 +13,7 @@ import com.qm.reach.ui.fragment.home.router.HomeRouter
 import com.qm.reach.ui.fragment.home.viewmodel.HomeViewModel
 import javax.inject.Inject
 
+//MARK:- Home Fragment @Docs
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
   Injectable,
   CustomSearchViewDelegate, HomeViewProtocol {
@@ -36,6 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
   override fun onSearcSelection() {
     mViewModel.filter()
   }
+
   //MARK:- match text using pattern REGX util
   override fun handleOfferOnclick(str: String) {
 

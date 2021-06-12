@@ -30,9 +30,13 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.qm.reach.data.model.ListDataItem
-import com.qm.reach.util.*
 import com.qm.reach.R
+import com.qm.reach.data.model.ListDataItem
+import com.qm.reach.util.gone
+import com.qm.reach.util.invisible
+import com.qm.reach.util.isValidUrl
+import com.qm.reach.util.loadImageFromURL
+import com.qm.reach.util.visible
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigation
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigationItem
 import timber.log.Timber
@@ -109,10 +113,10 @@ class OtherViewsBinding {
             val decodedString: ByteArray = Base64.decode(obj.toString(), Base64.DEFAULT)
             Glide.with(imageView.context).asBitmap()
               .load(decodedString)
-              .apply(RequestOptions().override(30, 30))
+              .apply(RequestOptions().override(200, 200))
               .placeholder(R.drawable.ic_broken_image)
               .error(R.drawable.ic_broken_image)
-              .diskCacheStrategy(DiskCacheStrategy.ALL)
+              .diskCacheStrategy(DiskCacheStrategy.NONE)
               .into(imageView)
           }
           else -> {
@@ -174,6 +178,7 @@ class OtherViewsBinding {
     divider: Boolean?
   ) {
     adapter?.let {
+      it.setHasStableIds(true)
       recyclerView.adapter = it
       divider?.let { div ->
         if (div) {
